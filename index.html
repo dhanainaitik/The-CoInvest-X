@@ -17,6 +17,7 @@
       body {
         background: linear-gradient(135deg, #eef1f7, #f9fbff);
         color: #1f2937;
+        overflow-x: hidden; /* ✅ prevents mobile side scroll */
       }
 
       /* ========== NAVBAR ========== */
@@ -34,13 +35,7 @@
         gap: 16px;
       }
 
-      @media (min-width: 1024px) {
-        .navbar {
-          padding: 16px 48px;
-        }
-      }
-
-      /* LOGO (Groww-style) */
+      /* LOGO */
       .logo {
         display: flex;
         align-items: center;
@@ -49,9 +44,13 @@
 
       .logo img {
         border-radius: 50px;
-        height: 60px; /* Groww-like size */
+        height: 60px;
         width: auto;
         object-fit: contain;
+      }
+
+      .navbar nav {
+        display: flex;
       }
 
       .navbar nav a {
@@ -61,31 +60,6 @@
         position: relative;
         font-weight: 500;
         font-size: 0.95rem;
-      }
-
-      @media (max-width: 768px) {
-        .navbar nav {
-          display: none;
-        }
-
-        .navbar input {
-          display: none;
-        }
-      }
-
-      .navbar nav a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-        width: 0;
-        height: 2px;
-        background: #2563eb;
-        transition: width 0.3s ease;
-      }
-
-      .navbar nav a:hover::after {
-        width: 100%;
       }
 
       .navbar input {
@@ -102,19 +76,13 @@
       }
 
       .hero h1 {
-        font-size: clamp(1.5rem, 5vw, 3rem);
-      }
-
-      @media (max-width: 768px) {
-        .hero {
-          padding: 40px 16px 30px;
-        }
+        font-size: clamp(1.6rem, 6vw, 3rem);
       }
 
       .hero p {
         margin-top: 10px;
         color: #6b7280;
-        font-size: 1.05rem;
+        font-size: 1rem;
       }
 
       /* ========== SECTIONS ========== */
@@ -124,84 +92,30 @@
         padding: 40px 16px;
       }
 
-      @media (min-width: 768px) {
-        .section {
-          padding: 60px 24px;
-        }
-      }
-
       .section.light {
         background: #ffffff;
-        /* padding: 10px 84px; */
         border-radius: 24px;
       }
 
       .section-title {
-        display: inline-block;
-
         font-size: clamp(1.3rem, 4vw, 1.8rem);
         font-weight: 600;
         margin-bottom: 24px;
       }
-      .section-title a {
-        text-decoration: none;
-        color: #111827;
-      }
-      .section-title a:hover {
-        text-shadow: #9ca3af 0px 2px 4px;
-      }
 
-      /* ========== VIDEO RAIL (GROWW STYLE) ========== */
+      /* ========== VIDEO RAIL ========== */
       .video-wrapper {
         position: relative;
       }
 
-      /* gradient fade edges */
-      .video-wrapper::before,
-      .video-wrapper::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        width: 40px;
-        height: 100%;
-        z-index: 2;
-        pointer-events: none;
-      }
-
-      @media (min-width: 768px) {
-        .video-wrapper::before,
-        .video-wrapper::after {
-          width: 60px;
-        }
-      }
-
-      .video-wrapper::before {
-        left: 0;
-        background: linear-gradient(to right, #f9fbff, transparent);
-      }
-
-      .video-wrapper::after {
-        right: 0;
-        background: linear-gradient(to left, #f9fbff, transparent);
-      }
-
       .video-rail {
         display: flex;
-        gap: 28px;
+        gap: 20px;
         overflow-x: auto;
-        padding: 10px 0 20px;
+        padding-bottom: 20px;
         scroll-snap-type: x mandatory;
       }
 
-      .video-rail::-webkit-scrollbar {
-        height: 6px;
-      }
-      .video-rail::-webkit-scrollbar-thumb {
-        background: #d1d5db;
-        border-radius: 10px;
-      }
-
-      /* ========== VIDEO CARD ========== */
       .video-card {
         min-width: 280px;
         background: #ffffff;
@@ -211,71 +125,28 @@
         color: #111827;
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         scroll-snap-align: start;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-      }
-
-      @media (min-width: 768px) {
-        .video-card {
-          min-width: 360px;
-        }
-      }
-
-      .video-thumb {
-        position: relative;
       }
 
       .video-thumb img {
         width: 100%;
-        height: 210px;
+        height: auto; /* ✅ mobile-friendly */
         object-fit: cover;
       }
 
-      /* play icon */
-      .video-thumb::after {
-        content: "▶";
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        color: white;
-        background: rgba(0, 0, 0, 0.25);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .video-card:hover .video-thumb::after {
-        opacity: 1;
-      }
-
       .video-card p {
-        padding: 14px 16px;
-        font-size: clamp(0.95rem, 2.5vw, 1.05rem);
-        font-weight: 500;
+        padding: 14px;
         text-align: center;
-      }
-
-      .video-card:hover {
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.15);
+        font-size: 1rem;
       }
 
       /* ========== SERVICES ========== */
       .services {
         padding: 16px 0;
-        margin-top: 10px;
       }
 
       .services li {
         margin-bottom: 12px;
-        font-size: clamp(0.95rem, 2vw, 1.1rem);
-      }
-
-      @media (min-width: 768px) {
-        .services {
-          padding: 30px;
-        }
+        font-size: 1rem;
       }
 
       /* ========== FORM ========== */
@@ -285,12 +156,6 @@
         flex-direction: column;
         gap: 14px;
         width: 100%;
-      }
-
-      @media (max-width: 480px) {
-        .form {
-          max-width: 100%;
-        }
       }
 
       .form input,
@@ -308,11 +173,6 @@
         border: none;
         cursor: pointer;
         font-weight: 500;
-        transition: background 0.3s ease;
-      }
-
-      .form button:hover {
-        background: #1e40af;
       }
 
       /* ========== FOOTER ========== */
@@ -327,23 +187,48 @@
         color: #9ca3af;
         margin: 0 8px;
         text-decoration: none;
-        display: inline-block;
         font-size: 0.9rem;
       }
 
-      @media (min-width: 768px) {
-        footer {
-          margin-top: 60px;
-          padding: 24px;
+      /* ============================= */
+      /* 🔥 MOBILE RESPONSIVE FIXES 🔥 */
+      /* ============================= */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          align-items: center;
         }
 
-        footer a {
-          margin: 0 12px;
+        .logo img {
+          height: 52px;
         }
-      }
 
-      footer a:hover {
-        color: white;
+        .navbar nav {
+          flex-direction: column;
+          gap: 8px;
+          align-items: center;
+        }
+
+        .navbar nav a {
+          margin: 4px 0;
+        }
+
+        .navbar input {
+          width: 100%;
+          max-width: 260px;
+        }
+
+        .hero {
+          padding: 40px 16px 30px;
+        }
+
+        .section {
+          padding: 32px 14px;
+        }
+
+        .video-card {
+          min-width: 240px;
+        }
       }
 
       /* ========== ANIMATION ========== */
@@ -362,21 +247,21 @@
 
   <body>
     <header class="navbar">
-      <div class="logo-container">
-        <a
-          href="https://www.youtube.com/@dhanainaitik/videos"
-          target="_blank"
-          class="logo"
-        >
-          <img src="Businesslogo.png" alt="The Co-InvestX Logo" />
-        </a>
-      </div>
+      <a
+        href="https://www.youtube.com/@dhanainaitik/videos"
+        target="_blank"
+        class="logo"
+      >
+        <img src="Businesslogo.png" alt="The Co-InvestX Logo" />
+      </a>
+
       <nav>
         <a href="#">Home</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
         <a href="#">Read More</a>
       </nav>
+
       <input type="text" placeholder="Search..." />
     </header>
 
@@ -386,43 +271,27 @@
     </section>
 
     <section class="section">
-      <h2 class="section-title">
-        <a href="https://www.youtube.com/@dhanainaitik/videos" target="_blank"
-          >Youtube Tutorials</a
-        >
-      </h2>
+      <h2 class="section-title">Youtube Tutorials</h2>
 
       <div class="video-wrapper">
         <div class="video-rail">
-          <a
-            href="https://youtu.be/X3RBkjSRXZQ"
-            target="_blank"
-            class="video-card"
-          >
+          <a href="#" class="video-card">
             <div class="video-thumb">
-              <img src="hh.jpg" alt="Silver vs Gold" />
+              <img src="hh.jpg" />
             </div>
             <p>Silver vs Gold</p>
           </a>
 
-          <a
-            href="https://youtu.be/Gd1HjKAHvpg"
-            target="_blank"
-            class="video-card"
-          >
+          <a href="#" class="video-card">
             <div class="video-thumb">
-              <img src="ipo.jpg" alt="IPO Crash" />
+              <img src="ipo.jpg" />
             </div>
             <p>IPO Crash</p>
           </a>
 
-          <a
-            href="https://youtu.be/XM2199brtc0"
-            target="_blank"
-            class="video-card"
-          >
+          <a href="#" class="video-card">
             <div class="video-thumb">
-              <img src="compounding.jpg" alt="Compounding" />
+              <img src="compounding.jpg" />
             </div>
             <p>Compounding</p>
           </a>
@@ -456,14 +325,8 @@
     </section>
 
     <footer>
-      <a
-        href="https://www.linkedin.com/in/naitik-dhanai-a424a6381/"
-        target="_blank"
-        >LinkedIn</a
-      >
-      <a href="https://www.instagram.com/theco_investx/" target="_blank"
-        >Instagram</a
-      >
+      <a href="#">LinkedIn</a>
+      <a href="#">Instagram</a>
     </footer>
   </body>
 </html>
