@@ -1,332 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Co-InvestX</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Co-InvestX</title>
 
-    <style>
-      /* ========== RESET ========== */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", system-ui, sans-serif;
-      }
+  <style>
+    /* ========== RESET ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
 
-      body {
-        background: linear-gradient(135deg, #eef1f7, #f9fbff);
-        color: #1f2937;
-        overflow-x: hidden; /* ✅ prevents mobile side scroll */
-      }
+    body {
+      background: linear-gradient(135deg, #eef1f7, #f9fbff);
+      color: #1f2937;
+      overflow-x: hidden;
+    }
 
-      /* ========== NAVBAR ========== */
+    /* ========== NAVBAR ========== */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      border-radius: 50px;
+    }
+
+    .navbar nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar nav a {
+      margin: 0 14px;
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .navbar nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #2563eb;
+      transition: width 0.3s ease;
+    }
+
+    .navbar nav a:hover::after {
+      width: 100%;
+    }
+
+    .navbar input {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      text-align: center;
+      padding: 70px 20px 60px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      color: #6b7280;
+      font-size: 1.05rem;
+    }
+
+    /* ========== SECTION ========== */
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 24px;
+    }
+
+    .section.light {
+      background: #ffffff;
+      border-radius: 24px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    /* ========== VIDEO RAIL ========== */
+    .video-wrapper {
+      position: relative;
+    }
+
+    .video-rail {
+      display: flex;
+      gap: 28px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .video-card {
+      min-width: 360px;
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #111827;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      scroll-snap-align: start;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.15);
+    }
+
+    .video-thumb {
+      position: relative;
+    }
+
+    .video-thumb img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+    }
+
+    /* overlay — mobile click FIX */
+    .video-thumb::after {
+      content: "▶";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+      background: rgba(0,0,0,0.25);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .video-card:hover .video-thumb::after {
+      opacity: 1;
+    }
+
+    .video-card p {
+      padding: 14px;
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    /* ========== SERVICES ========== */
+    .services {
+      padding: 16px 0;
+    }
+
+    .services li {
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    /* ========== FORM ========== */
+    .form {
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .form input,
+    .form select {
+      padding: 11px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+    }
+
+    .form button {
+      background: #2563eb;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      padding: 24px;
+      background: #111827;
+    }
+
+    footer a {
+      color: #9ca3af;
+      margin: 0 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    /* ============================= */
+    /* RESPONSIVENESS (ONLY ADDITIVE) */
+    /* ============================= */
+    @media (max-width: 768px) {
       .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px 24px;
-        background: #ffffff;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        flex-wrap: wrap;
-        gap: 16px;
-      }
-
-      /* LOGO */
-      .logo {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
+        padding: 12px 16px;
       }
 
       .logo img {
-        border-radius: 50px;
-        height: 60px;
-        width: auto;
-        object-fit: contain;
-      }
-
-      .navbar nav {
-        display: flex;
+        height: 48px;
       }
 
       .navbar nav a {
-        margin: 0 14px;
-        text-decoration: none;
-        color: #374151;
-        position: relative;
-        font-weight: 500;
-        font-size: 0.95rem;
-      }
-
-      .navbar input {
-        padding: 6px 10px;
-        border-radius: 6px;
-        border: 1px solid #d1d5db;
-      }
-
-      /* ========== HERO ========== */
-      .hero {
-        text-align: center;
-        padding: 60px 20px 50px;
-        animation: fadeUp 0.9s ease;
-      }
-
-      .hero h1 {
-        font-size: clamp(1.6rem, 6vw, 3rem);
-      }
-
-      .hero p {
-        margin-top: 10px;
-        color: #6b7280;
-        font-size: 1rem;
-      }
-
-      /* ========== SECTIONS ========== */
-      .section {
-        max-width: 1200px;
-        margin: auto;
-        padding: 40px 16px;
-      }
-
-      .section.light {
-        background: #ffffff;
-        border-radius: 24px;
-      }
-
-      .section-title {
-        font-size: clamp(1.3rem, 4vw, 1.8rem);
-        font-weight: 600;
-        margin-bottom: 24px;
-      }
-
-      /* ========== VIDEO RAIL ========== */
-      .video-wrapper {
-        position: relative;
-      }
-
-      .video-rail {
-        display: flex;
-        gap: 20px;
-        overflow-x: auto;
-        padding-bottom: 20px;
-        scroll-snap-type: x mandatory;
-      }
-
-      .video-card {
-        min-width: 280px;
-        background: #ffffff;
-        border-radius: 18px;
-        overflow: hidden;
-        text-decoration: none;
-        color: #111827;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-        scroll-snap-align: start;
-      }
-
-      .video-thumb img {
-        width: 100%;
-        height: auto; /* ✅ mobile-friendly */
-        object-fit: cover;
-      }
-
-      .video-card p {
-        padding: 14px;
-        text-align: center;
-        font-size: 1rem;
-      }
-
-      /* ========== SERVICES ========== */
-      .services {
-        padding: 16px 0;
-      }
-
-      .services li {
-        margin-bottom: 12px;
-        font-size: 1rem;
-      }
-
-      /* ========== FORM ========== */
-      .form {
-        max-width: 420px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        width: 100%;
-      }
-
-      .form input,
-      .form select {
-        padding: 11px;
-        border-radius: 8px;
-        border: 1px solid #d1d5db;
-      }
-
-      .form button {
-        background: #2563eb;
-        color: white;
-        padding: 12px;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        font-weight: 500;
-      }
-
-      /* ========== FOOTER ========== */
-      footer {
-        margin-top: 40px;
-        text-align: center;
-        padding: 20px 16px;
-        background: #111827;
-      }
-
-      footer a {
-        color: #9ca3af;
-        margin: 0 8px;
-        text-decoration: none;
+        margin: 0 10px;
         font-size: 0.9rem;
       }
 
-      /* ============================= */
-      /* 🔥 MOBILE RESPONSIVE FIXES 🔥 */
-      /* ============================= */
-      @media (max-width: 768px) {
-        .navbar {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .logo img {
-          height: 52px;
-        }
-
-        .navbar nav {
-          flex-direction: column;
-          gap: 8px;
-          align-items: center;
-        }
-
-        .navbar nav a {
-          margin: 4px 0;
-        }
-
-        .navbar input {
-          width: 100%;
-          max-width: 260px;
-        }
-
-        .hero {
-          padding: 40px 16px 30px;
-        }
-
-        .section {
-          padding: 32px 14px;
-        }
-
-        .video-card {
-          min-width: 240px;
-        }
+      .navbar input {
+        max-width: 180px;
+        font-size: 0.9rem;
       }
 
-      /* ========== ANIMATION ========== */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .hero {
+        padding: 40px 16px 30px;
       }
-    </style>
-  </head>
 
-  <body>
-    <header class="navbar">
-      <a
-        href="https://www.youtube.com/@dhanainaitik/videos"
-        target="_blank"
-        class="logo"
-      >
-        <img src="Businesslogo.png" alt="The Co-InvestX Logo" />
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .section {
+        padding: 32px 16px;
+      }
+
+      .video-card {
+        min-width: 260px;
+      }
+
+      .video-thumb img {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="https://www.youtube.com/@dhanainaitik/videos" target="_blank" class="logo">
+    <img src="Businesslogo.png" alt="The Co-InvestX Logo">
+  </a>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Read More</a>
+  </nav>
+
+  <input type="text" placeholder="Search...">
+</header>
+
+<section class="hero">
+  <h1>The Co-InvestX</h1>
+  <p>Future is here. Where are you?</p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Youtube Tutorials</h2>
+
+  <div class="video-wrapper">
+    <div class="video-rail">
+
+      <a href="https://youtu.be/X3RBkjSRXZQ" target="_blank" class="video-card">
+        <div class="video-thumb">
+          <img src="hh.jpg" alt="Silver vs Gold">
+        </div>
+        <p>Silver vs Gold</p>
       </a>
 
-      <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a href="#">Read More</a>
-      </nav>
-
-      <input type="text" placeholder="Search..." />
-    </header>
-
-    <section class="hero">
-      <h1>The Co-InvestX</h1>
-      <p>Future is here. Where are you?</p>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">Youtube Tutorials</h2>
-
-      <div class="video-wrapper">
-        <div class="video-rail">
-          <a href="#" class="video-card">
-            <div class="video-thumb">
-              <img src="hh.jpg" />
-            </div>
-            <p>Silver vs Gold</p>
-          </a>
-
-          <a href="#" class="video-card">
-            <div class="video-thumb">
-              <img src="ipo.jpg" />
-            </div>
-            <p>IPO Crash</p>
-          </a>
-
-          <a href="#" class="video-card">
-            <div class="video-thumb">
-              <img src="compounding.jpg" />
-            </div>
-            <p>Compounding</p>
-          </a>
+      <a href="https://youtu.be/Gd1HjKAHvpg" target="_blank" class="video-card">
+        <div class="video-thumb">
+          <img src="ipo.jpg" alt="IPO Crash">
         </div>
-      </div>
-    </section>
+        <p>IPO Crash</p>
+      </a>
 
-    <section class="section light">
-      <h2>Services We Provide</h2>
-      <ul class="services">
-        <li>Financial Education</li>
-        <li>Market Data Analysis</li>
-        <li>Courses for Kids & Adults</li>
-      </ul>
-    </section>
+      <a href="https://youtu.be/XM2199brtc0" target="_blank" class="video-card">
+        <div class="video-thumb">
+          <img src="compounding.jpg" alt="Compounding">
+        </div>
+        <p>Compounding</p>
+      </a>
 
-    <section class="section">
-      <h2>Interested? Reach Out</h2>
-      <form class="form">
-        <input type="text" placeholder="Name" />
-        <input type="date" />
-        <select>
-          <option disabled selected>Select Service</option>
-          <option>Gold / Silver</option>
-          <option>Stock Market</option>
-          <option>Forex</option>
-          <option>Business</option>
-        </select>
-        <button>Submit</button>
-      </form>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <footer>
-      <a href="#">LinkedIn</a>
-      <a href="#">Instagram</a>
-    </footer>
-  </body>
+<section class="section light">
+  <h2>Services We Provide</h2>
+  <ul class="services">
+    <li>Financial Education</li>
+    <li>Market Data Analysis</li>
+    <li>Courses for Kids & Adults</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>Interested? Reach Out</h2>
+  <form class="form">
+    <input type="text" placeholder="Name">
+    <input type="date">
+    <select>
+      <option disabled selected>Select Service</option>
+      <option>Gold / Silver</option>
+      <option>Stock Market</option>
+      <option>Forex</option>
+      <option>Business</option>
+    </select>
+    <button>Submit</button>
+  </form>
+</section>
+
+<footer>
+  <a href="https://www.linkedin.com/in/naitik-dhanai-a424a6381/" target="_blank">LinkedIn</a>
+  <a href="https://www.instagram.com/theco_investx/" target="_blank">Instagram</a>
+</footer>
+
+</body>
 </html>
