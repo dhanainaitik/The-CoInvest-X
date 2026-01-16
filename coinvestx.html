@@ -1,182 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CO-InvestX</title>
-    <link rel="stylesheet" href="coinvestx.css">
-    
-    <style>
-        body{
-                background-image: url('bkc.jpg');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-        }
-        h1 {
-            border: 3px none;
-            color: rgb(5, 40, 9);
-           
-            text-align: center;
-            padding: 0.2em 20em;
-               
-        }
-        #middlepad{
-            border: 1px none #ccc;
-            padding: 0.2em 40em;
-        }
-        .borderright{
-            background-color: rgb(31, 212, 170);
-            border: 3px solid rgb(146, 59, 59);
-            padding-left: 30px;
-            margin-left: 30px;
-            margin-right: 1200px;
-        }
-        a{
-            padding-right: 20px;
-            color: #ffffff;
-        }
-        .btn{
-            margin-left: 8px;
-            font-size: 14px;
-            background-color: rgb(154, 72, 72);
-            cursor: pointer;
-            border-radius: 4px;
-            border-width: 3px;
-            font-weight: lighter;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
-        .btn:hover{
-            background-color: rgb(0, 0, 0);
-            font-weight: bold;
-            font-style: normal;
-            font-size: medium;
-        }
-        .navbar{
-            padding: 1px 4px;
-            background-color: rgb(0, 0, 0);
-            border-radius: 20px;
-        }
-        .navbar li a:hover{
-            color: red;
-        }
-        .navbar li{
-            margin: 10px 10px;
-            float: right;
-            list-style: none;
-        }
-        .navbar ul a {
-            text-decoration: none;
-            padding: auto px;
-        }
-        .navbar ul {
-            overflow: auto;
-        }
-        .navbar input{
-            margin-left: 2px;
-            margin-top: 5px;
-            padding: 4px 4px ;
-            border-radius: 3px;
-            border-color: rgb(242, 242, 80);
-            border-width: 4px;
-        }
-        .search{
-            color: rgb(202, 0, 0);
-        }
-        .niche{
-            padding: 4px;
-            border: 3px solid red;
-            border-radius: 8px;
-            color: rgb(97, 2, 114);
-            background-color: rgb(238, 140, 200);
-            text-decoration: none;
-        }
-        .niche:hover{
-            background-color: aliceblue;
-        }
-        
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Co-InvestX</title>
+
+<style>
+/* ========== RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #eef1f7, #f9fbff);
+  color: #1f2937;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* LOGO (Groww-style) */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img {
+    border-radius: 50px;
+  height: 60px;           /* Groww-like size */
+  width: auto;
+  object-fit: contain;
+}
+
+
+.navbar nav a {
+  margin: 0 14px;
+  text-decoration: none;
+  color: #374151;
+  position: relative;
+  font-weight: 500;
+}
+
+.navbar nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: #2563eb;
+  transition: width 0.3s ease;
+}
+
+.navbar nav a:hover::after {
+  width: 100%;
+}
+
+.navbar input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+/* ========== HERO ========== */
+.hero {
+  text-align: center;
+  padding: 90px 20px 70px;
+  animation: fadeUp 0.9s ease;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: #6b7280;
+  font-size: 1.05rem;
+}
+
+/* ========== SECTIONS ========== */
+.section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 24px;
+}
+
+.section.light {
+  background: #ffffff;
+  /* padding: 10px 84px; */
+  border-radius: 24px;
+}
+
+.section-title {
+    display: inline-block;
+   
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.section-title a {
+  text-decoration: none;
+  color: #111827;
+}
+.section-title a:hover {
+   
+  
+  text-shadow: #9ca3af 0px 2px 4px;
+}
+
+/* ========== VIDEO RAIL (GROWW STYLE) ========== */
+.video-wrapper {
+  position: relative;
+}
+
+/* gradient fade edges */
+.video-wrapper::before,
+.video-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.video-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #f9fbff, transparent);
+}
+
+.video-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #f9fbff, transparent);
+}
+
+.video-rail {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  padding: 10px 0 20px;
+  scroll-snap-type: x mandatory;
+}
+
+.video-rail::-webkit-scrollbar {
+  height: 6px;
+}
+.video-rail::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+
+/* ========== VIDEO CARD ========== */
+.video-card {
+  min-width: 360px;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #111827;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  scroll-snap-align: start;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.video-thumb {
+  position: relative;
+}
+
+.video-thumb img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+/* play icon */
+.video-thumb::after {
+  content: "▶";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  background: rgba(0,0,0,0.25);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-card:hover .video-thumb::after {
+  opacity: 1;
+}
+
+.video-card p {
+  padding: 14px 128px;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.video-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.15);
+}
+
+/* ========== SERVICES ========== */
+.services {
+    padding: 30px;
+  margin-top: 10px;
+}
+
+.services li {
+  margin-bottom: 10px;
+  /* padding: 20px; */
+  font-size: 1.1rem;
+}
+
+/* ========== FORM ========== */
+.form {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form input,
+.form select {
+  padding: 11px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.form button {
+  background: #2563eb;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.form button:hover {
+  background: #1e40af;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  margin-top: 60px;
+  text-align: center;
+  padding: 24px;
+  background: #111827;
+}
+
+footer a {
+  color: #9ca3af;
+  margin: 0 12px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* ========== ANIMATION ========== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar">
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact us</a></li>
-                <li><a href="">Read more</a></li>
-                <div>
-                <input type="text" class="search"  placeholder="search in website ">
-                </div>
-            </ul>
-           
-        </nav>
-    </header>
- <h1>  The Co-InvestX </h1>
- <p id="middlepad">[ future is here where are you ? ]</p>
-<br>
- <h2 class="borderright">Youtube Tutorials : </h2>
- <a  href="https://youtu.be/X3RBkjSRXZQ?si=rGKEdokveZVKvErK" target="_blank"><img src="hh.jpg " height="200px" alt="Silver"></a>
- 
- <a href="https://youtu.be/Gd1HjKAHvpg?si=2UDiC8ALeENSQx_M" target="_blank"><img src="ipo.jpg " height="200px" alt="ipo"> </a>
- 
- <a href="https://youtu.be/XM2199brtc0?si=iIKkIwO4bFCKs6ig" target="_blank"><img src="compounding.jpg" alt="compounding"height="200px"></a>
- <br>
- <h2 class="borderright">Services we Provide : </h2>
-     <ul>
-        <li>YOUTUBE TUTORIALS ON FINANCE </li>
-        <li>REAL TIME DATA FROM MARKET </li>
-        <li>COURSES FOR KIDS/ADULTS </li>
-     </ul>
-<br>
-<br>
 
-<br>
-<h2 class="borderright">Interested Can Reach Out : </h2>
-<form>
-    <label for="name">Name : </label>
-    <input type="text" id="name">
-    <br>
-    <br>
-     <label for="dob">Date of Birth : </label>
-    <input type="date" id="dob">
-    <br>
-    <br>
-    <label for="service">Services you need:</label>
-    <select name="services needed" id="service">
-        <option value="" disabled selected>Select</option>
-        <option value="course on gold">Course on assest class (GOLD/SILVER)</option>
-        <option value="course on stock market">course on stock market</option>
-        <option value="course on stock market">course on forex market</option>
-        <option value="course on stock market">course on creating a BUSINESS</option>
+<header class="navbar">
+  <div class="logo-container">
+    <a href="https://www.youtube.com/@dhanainaitik/videos" target="_blank" class="logo">
+      <img src="Businesslogo.png" alt="The Co-InvestX Logo">
+    </a>
+  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Read More</a>
+  </nav>
+  <input type="text" placeholder="Search..." />
+</header>
+
+<section class="hero">
+  <h1>The Co-InvestX</h1>
+  <p>Future is here. Where are you?</p>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><a href="https://www.youtube.com/@dhanainaitik/videos" target="_blank">Youtube Tutorials</a></h2>
+
+  <div class="video-wrapper">
+    <div class="video-rail">
+      <a href="https://youtu.be/X3RBkjSRXZQ" target="_blank" class="video-card">
+        <div class="video-thumb">
+          <img src="hh.jpg" alt="Silver vs Gold">
+        </div>
+        <p>Silver vs Gold</p>
+      </a>
+
+      <a href="https://youtu.be/Gd1HjKAHvpg" target="_blank" class="video-card">
+        <div class="video-thumb">
+          <img src="ipo.jpg" alt="IPO Crash">
+        </div>
+        <p>IPO Crash</p>
+      </a>
+
+      <a href="https://youtu.be/XM2199brtc0" target="_blank" class="video-card">
+        <div class="video-thumb">
+          <img src="compounding.jpg" alt="Compounding">
+        </div>
+        <p>Compounding</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section light">
+  <h2>Services We Provide</h2>
+  <ul class="services">
+    <li>Financial Education</li>
+    <li>Market Data Analysis</li>
+    <li>Courses for Kids & Adults</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>Interested? Reach Out</h2>
+  <form class="form">
+    <input type="text" placeholder="Name">
+    <input type="date">
+    <select>
+      <option disabled selected>Select Service</option>
+      <option>Gold / Silver</option>
+      <option>Stock Market</option>
+      <option>Forex</option>
+      <option>Business</option>
     </select>
-    <br>
-    <br>
-    <button class="btn" type="submit">Submit Now</button>
-    <br>
-    <br>
-</form>
-<h2 class="borderright">CONTACT US : </h2>
-<br>
-<ul>
-    <li>
-<a  class="niche" href="https://www.linkedin.com/in/naitik-dhanai-a424a6381/" alt="linkedin" target="_blank"><strong>linkedin<strong></a>
-    </li>
-    <br>
-    <li>
-    <a  class="niche" href="https://www.instagram.com/naitik_dhanai77/" alt="instagram" target="_blank"><strong>instagram<strong></a>
-        </li>
-</ul>
-<br>
+    <button>Submit</button>
+  </form>
+</section>
 
-<details>
-    <summary  style="font-size: 1.5em; font-weight: bold;">read about us : </summary>
-    <p style="font-weight: normal;">Go-InvestX is a professionally driven financial education and investment guidance group committed to empowering individuals with practical, real-world knowledge of finance, the stock market, forex, and precious metals such as gold and silver.</p>
-    <p style="font-weight: normal;">Established as a self-registered entity in 2005, we bring nearly two decades of market experience and have successfully managed portfolios exceeding ₹5 crore, reflecting disciplined strategy and long-term trust.</p>
-    <p style="font-weight: normal;">Through our website and YouTube channel, Go-InvestX delivers structured courses, market insights, and simplified explanations designed for both beginners and serious investors.</p>
-    <p style="font-weight: normal;">We operate as a collaborative team focused on transparency, risk awareness, and sustainable wealth creation.</p>
-    <p style="font-weight: normal;">Whether you seek learning, strategic clarity, or ongoing financial support, Go-InvestX is positioned as a reliable partner to guide your financial decisions with confidence and responsibility.</p>
-</details>
+<footer>
+  <a href="https://www.linkedin.com/in/naitik-dhanai-a424a6381/" target="_blank">LinkedIn</a>
+  <a href="https://www.instagram.com/theco_investx/" target="_blank">Instagram</a>
+</footer>
+
 </body>
 </html>
