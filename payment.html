@@ -138,6 +138,10 @@
         transform: scale(0.98) translateY(-1px);
       }
 
+      .hidden {
+        display: none;
+      }
+
       /* Animations */
       @keyframes fadeIn {
         from {
@@ -179,14 +183,6 @@
       <form action="process_payment.php" method="POST">
         <input type="text" name="name" placeholder="Full Name" required />
         <input type="text" name="amount" placeholder="Amount" required />
-        <input
-          type="text"
-          name="card_number"
-          placeholder="Card Number"
-          required
-        />
-        <input type="text" name="expiry_date" placeholder="Expiry Date (MM/YY)" required />
-        <input type="text" name="cvv" placeholder="CVV" required />
         <select name="payment_method" id="payment_method" required>
           <option value="" disabled selected>Select Payment Method</option>
           <option value="credit_card">Credit Card</option>
@@ -194,6 +190,32 @@
           <option value="net_banking">Net Banking</option>
           <option value="upi">UPI</option>
         </select>
+
+        <div id="card_fields">
+          <input
+            type="text"
+            name="card_number"
+            placeholder="Card Number"
+            required
+          />
+          <input
+            type="text"
+            name="expiry_date"
+            placeholder="Expiry Date (MM/YY)"
+            required
+          />
+          <input type="text" name="cvv" placeholder="CVV" required />
+        </div>
+
+        <div id="upi_field" class="hidden">
+          <input
+            type="text"
+            name="upi_id"
+            placeholder="Enter Virtual UPI ID"
+            required
+          />
+        </div>
+
         <button type="submit">Pay Now</button>
       </form>
     </div>
