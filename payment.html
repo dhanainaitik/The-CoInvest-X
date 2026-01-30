@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Page</title>
+    <style>
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("clouds.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        min-height: 100vh;
+      }
+
+      .heading {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        animation: slideDown 0.8s ease-out;
+      }
+
+      .heading h1 {
+        color: rgb(0, 0, 0);
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, -0.5);
+        margin: 0;
+      }
+
+      .formhai {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto 40px;
+        animation: fadeIn 1s ease-in-out;
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+
+      .formhai form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .formhai input,
+      .formhai select,
+      .formhai button {
+        padding: 12px 15px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        animation: slideUp 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      .formhai input:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .formhai input:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .formhai input:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .formhai input:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .formhai input:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .formhai select {
+        animation-delay: 0.6s;
+      }
+      .formhai button {
+        animation-delay: 0.7s;
+      }
+
+      .formhai input,
+      .formhai select {
+        transition: all 0.3s ease;
+      }
+
+      .formhai input:hover,
+      .formhai select:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .formhai input:focus,
+      .formhai select:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+        transform: translateY(-2px);
+      }
+
+      .formhai select {
+        background-color: white;
+        cursor: pointer;
+      }
+
+      .formhai button {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .formhai button:hover {
+        background-color: #45a049;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
+      }
+
+      .formhai button:active {
+        transform: scale(0.98) translateY(-1px);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="heading">
+      <h1>Payment Page</h1>
+    </div>
+    <div class="formhai">
+      <form action="process_payment.php" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="text" name="amount" placeholder="Amount" required />
+        <input
+          type="text"
+          name="card_number"
+          placeholder="Card Number"
+          required
+        />
+        <input type="text" name="expiry_date" placeholder="Expiry Date (MM/YY)" required />
+        <input type="text" name="cvv" placeholder="CVV" required />
+        <select name="payment_method" id="payment_method" required>
+          <option value="" disabled selected>Select Payment Method</option>
+          <option value="credit_card">Credit Card</option>
+          <option value="debit_card">Debit Card</option>
+          <option value="net_banking">Net Banking</option>
+          <option value="upi">UPI</option>
+        </select>
+        <button type="submit">Pay Now</button>
+      </form>
+    </div>
+  </body>
+</html>
